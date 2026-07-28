@@ -8,7 +8,6 @@ import { AuthService } from '../../../feature/auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [RouterLink, MatToolbarModule, MatButtonModule, MatIconModule],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">

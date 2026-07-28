@@ -153,64 +153,6 @@
   }
 }
 
-// Palm trees — perspective depth
-.palm {
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.p-1 {
-  height: clamp(200px, 50vh, 400px);
-  bottom: 0;
-  left: 2%;
-  opacity: 0.9;
-  z-index: 3;
-}
-
-.p-2 {
-  height: clamp(130px, 32vh, 260px);
-  bottom: 8%;
-  left: 6%;
-  opacity: 0.65;
-  z-index: 2;
-}
-
-.p-3 {
-  height: clamp(80px, 20vh, 160px);
-  bottom: 16%;
-  left: 10%;
-  opacity: 0.4;
-  z-index: 1;
-}
-
-.pr {
-  left: auto;
-}
-
-.p-1.pr {
-  right: 2%;
-}
-
-.p-2.pr {
-  right: 6%;
-  transform: scaleX(-1);
-}
-
-.p-3.pr {
-  right: 10%;
-  transform: scaleX(-1);
-}
-
-@media (max-width: 768px) {
-  .p-1 { height: clamp(150px, 40vh, 300px); left: 1%; }
-  .p-2 { height: clamp(100px, 25vh, 200px); left: 5%; }
-  .p-3 { display: none; }
-  .p-1.pr { right: 1%; }
-  .p-2.pr { right: 5%; }
-  .p-3.pr { display: none; }
-}
-
 // Classic vaporwave road
 .road {
   position: absolute;

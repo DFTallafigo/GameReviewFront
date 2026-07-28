@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,6 @@ import { ReviewService } from '../review.service';
 
 @Component({
   selector: 'app-review-form',
-  standalone: true,
   imports: [
     ReactiveFormsModule, MatDialogModule,
     MatFormFieldModule, MatInputModule,
@@ -63,10 +62,11 @@ export class ReviewFormComponent {
     comment: ['']
   });
 
-  selectedScore = () => this.form.get('score')!.value as number;
+  selectedScore = signal(0);
   loading = false;
 
   setScore(score: number): void {
+    this.selectedScore.set(score);
     this.form.patchValue({ score });
   }
 

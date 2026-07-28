@@ -11,7 +11,6 @@ import { UserProfile } from '../../domain/user-profile.model';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
   imports: [RouterLink, DatePipe, MatCardModule, MatButtonModule, MatIconModule, MatChipsModule],
   template: `
     @if (profile()) {

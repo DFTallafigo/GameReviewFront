@@ -16,7 +16,6 @@ import { ReviewFormComponent } from '../../reviews/review-form/review-form.compo
 
 @Component({
   selector: 'app-detail',
-  standalone: true,
   imports: [
     RouterLink, DecimalPipe, DatePipe,
     MatCardModule, MatButtonModule, MatIconModule,

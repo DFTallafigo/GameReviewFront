@@ -11,7 +11,6 @@ import { VideogameService } from '../videogame.service';
 
 @Component({
   selector: 'app-form',
-  standalone: true,
   imports: [
     RouterLink, ReactiveFormsModule,
     MatCardModule, MatFormFieldModule, MatInputModule,

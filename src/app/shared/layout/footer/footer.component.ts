@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,
   template: `
     <footer class="footer">
       <p>GameReview &copy; 2026 &mdash; API Backend: Spring Boot</p>

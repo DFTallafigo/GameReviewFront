@@ -14,7 +14,6 @@ import { VideogameResponse } from '../../../domain/videogame.model';
 
 @Component({
   selector: 'app-list',
-  standalone: true,
   imports: [
     RouterLink, FormsModule, DecimalPipe,
     MatCardModule, MatButtonModule, MatIconModule,

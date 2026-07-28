@@ -8,6 +8,5 @@ export const adminGuard: CanActivateFn = () => {
 
   if (authContext.isAuthenticated() && authContext.isAdmin()) return true;
 
-  router.navigate(['/videogames']);
-  return false;
+  return router.parseUrl('/videogames');
 };
