@@ -45,6 +45,7 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "polyfills": ["zone.js"],
             "inlineStyleLanguage": "scss",
             "assets": [
               {
@@ -92,6 +93,24 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "GR-frontend:build:development",
+            "tsConfig": "tsconfig.spec.json",
+            "runner": "karma",
+            "runnerConfig": "karma.conf.js",
+            "browsers": ["ChromeHeadless"],
+            "include": ["**/*.spec.ts"],
+            "exclude": [],
+            "coverage": true,
+            "coverageReporters": [
+              ["lcovonly"],
+              ["html"],
+              ["text-summary"]
+            ]
+          }
         }
       }
     }
