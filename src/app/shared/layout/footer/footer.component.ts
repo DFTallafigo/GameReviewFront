@@ -11,11 +11,11 @@ import { Component } from '@angular/core';
   styles: [`
     .footer {
       text-align: center;
-      padding: 16px;
-      font-size: 0.85rem;
-      opacity: 0.7;
+      padding: 2px;
+      font-size: 0.75rem;
+      opacity: 0.5;
       border-top: 1px solid var(--mat-sys-outline-variant, #ccc);
-      margin-top: 32px;
+      margin-top: 0;
     }
   `]
 })

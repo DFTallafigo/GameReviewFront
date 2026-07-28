@@ -3,7 +3,15 @@ import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'videogames', pathMatch: 'full' },
+  {
+    path: '',
+    loadComponent: () => import('./feature/home/home.component').then(m => m.HomeComponent)
+  },
+  {
+    path: 'home',
+    redirectTo: '',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     loadComponent: () => import('./feature/auth/login/login.component').then(m => m.LoginComponent)
@@ -30,5 +38,5 @@ export const routes: Routes = [
     loadComponent: () => import('./feature/videogames/form/form.component').then(m => m.FormComponent),
     canActivate: [adminGuard]
   },
-  { path: '**', redirectTo: 'videogames' }
+  { path: '**', redirectTo: '' }
 ];

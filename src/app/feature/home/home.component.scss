@@ -1,0 +1,259 @@
+:host {
+  display: block;
+  height: calc(100vh - 128px);
+  height: calc(100dvh - 128px);
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #b44dd8 0%,
+    #8a3ebf 20%,
+    #5c2d91 40%,
+    #1a1035 65%,
+    #0a0a1a 100%
+  );
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.sun {
+  position: absolute;
+  top: 3%;
+  width: clamp(80px, 25vw, 220px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    #ffb3b3 0%,
+    #ff6b6b 25%,
+    #ff4757 50%,
+    transparent 75%
+  );
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(0, 0, 0, 0.18) 8px,
+      rgba(0, 0, 0, 0.18) 10px
+    );
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(5rem, 14vh, 10rem) 1.5rem 2rem;
+}
+
+.tagline {
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 1rem 0 1.5rem;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+
+  @media (max-width: 600px) {
+    letter-spacing: 0.15em;
+    margin: 0.5rem 0 1rem;
+  }
+}
+
+.description {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: min(90vw, 500px);
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+    margin: 0 auto 1.5rem;
+  }
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+}
+
+.cta-btn {
+  font-size: 1rem !important;
+  padding: 0.5rem 2rem !important;
+  border-radius: 4px !important;
+  letter-spacing: 0.05em;
+
+  @media (max-width: 600px) {
+    width: min(80vw, 280px) !important;
+  }
+}
+
+.cta-primary {
+  background: #ff71ce !important;
+  color: #fff !important;
+  box-shadow:
+    0 0 15px rgba(255, 113, 206, 0.5),
+    0 0 30px rgba(255, 113, 206, 0.2);
+}
+
+.cta-secondary {
+  background: transparent !important;
+  color: #01cdfe !important;
+  border: 1px solid #01cdfe !important;
+  box-shadow: 0 0 10px rgba(1, 205, 254, 0.3);
+}
+
+// 3D perspective grid
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  right: -50%;
+  height: 50%;
+  background-image:
+    linear-gradient(rgba(255, 113, 206, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 205, 254, 0.12) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+
+  @media (max-width: 600px) {
+    background-size: 30px 30px;
+    height: 35%;
+  }
+}
+
+// Palm trees — perspective depth
+.palm {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.p-1 {
+  height: clamp(200px, 50vh, 400px);
+  bottom: 0;
+  left: 2%;
+  opacity: 0.9;
+  z-index: 3;
+}
+
+.p-2 {
+  height: clamp(130px, 32vh, 260px);
+  bottom: 8%;
+  left: 6%;
+  opacity: 0.65;
+  z-index: 2;
+}
+
+.p-3 {
+  height: clamp(80px, 20vh, 160px);
+  bottom: 16%;
+  left: 10%;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.pr {
+  left: auto;
+}
+
+.p-1.pr {
+  right: 2%;
+}
+
+.p-2.pr {
+  right: 6%;
+  transform: scaleX(-1);
+}
+
+.p-3.pr {
+  right: 10%;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 768px) {
+  .p-1 { height: clamp(150px, 40vh, 300px); left: 1%; }
+  .p-2 { height: clamp(100px, 25vh, 200px); left: 5%; }
+  .p-3 { display: none; }
+  .p-1.pr { right: 1%; }
+  .p-2.pr { right: 5%; }
+  .p-3.pr { display: none; }
+}
+
+// Classic vaporwave road
+.road {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  right: 30%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(180deg, #3d3d3d 0%, #2a2a2a 50%, #1a1a1a 100%);
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: bottom center;
+  border-left: 6px solid rgba(255, 255, 255, 0.7);
+  border-right: 6px solid rgba(255, 255, 255, 0.7);
+  mask-image: linear-gradient(to top, black 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 80%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    margin-left: -3px;
+    background: repeating-linear-gradient(
+      180deg,
+      #ffd700 0px,
+      #ffd700 49px,
+      transparent 49px,
+      transparent 98px
+    );
+  }
+
+  @media (max-width: 768px) {
+    left: 25%;
+    right: 25%;
+    border-width: 4px;
+    &::after { width: 4px; margin-left: -2px; }
+  }
+}
+
+// Scanlines overlay
+.hero .cyber-scanlines::after {
+  z-index: 3;
+}
+
+
