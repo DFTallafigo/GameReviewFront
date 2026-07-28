@@ -127,12 +127,12 @@ import { ReviewFormComponent } from '../../reviews/review-form/review-form.compo
   `]
 })
 export class DetailComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private videogameService = inject(VideogameService);
-  private reviewService = inject(ReviewService);
-  private snackBar = inject(MatSnackBar);
-  private dialog = inject(MatDialog);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly videogameService = inject(VideogameService);
+  private readonly reviewService = inject(ReviewService);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
   authContext = inject(AuthContextService);
 
   game = signal<VideogameResponse | null>(null);

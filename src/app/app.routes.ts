@@ -38,5 +38,10 @@ export const routes: Routes = [
     loadComponent: () => import('./feature/videogames/form/form.component').then(m => m.FormComponent),
     canActivate: [adminGuard]
   },
+  {
+    path: 'profile',
+    loadComponent: () => import('./feature/profile/profile.component').then(m => m.ProfileComponent),
+    canActivate: [authGuard]
+  },
   { path: '**', redirectTo: '' }
 ];

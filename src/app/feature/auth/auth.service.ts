@@ -8,9 +8,9 @@ import { AuthContextService } from '../../shared/services/auth-context.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private http = inject(HttpClient);
-  private authContext = inject(AuthContextService);
-  private url = `${environment.apiUrl}/auth`;
+  private readonly http = inject(HttpClient);
+  private readonly authContext = inject(AuthContextService);
+  private readonly url = `${environment.apiUrl}/auth`;
 
   login(request: LoginRequest): Observable<ApiResponse<AuthResponse>> {
     return this.http.post<ApiResponse<AuthResponse>>(`${this.url}/login`, request)

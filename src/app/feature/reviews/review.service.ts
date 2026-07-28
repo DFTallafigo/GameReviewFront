@@ -7,7 +7,7 @@ import { ReviewRequest, ReviewResponse } from '../../domain/review.model';
 
 @Injectable({ providedIn: 'root' })
 export class ReviewService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   private baseUrl(videogameId: number): string {
     return `${environment.apiUrl}/videogames/${videogameId}/reviews`;

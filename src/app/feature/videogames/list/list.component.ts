@@ -11,7 +11,6 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { VideogameService } from '../videogame.service';
 import { VideogameResponse } from '../../../domain/videogame.model';
-import { PaginatedData } from '../../../domain/api-response.model';
 
 @Component({
   selector: 'app-list',
@@ -97,7 +96,7 @@ import { PaginatedData } from '../../../domain/api-response.model';
   `]
 })
 export class ListComponent implements OnInit {
-  private videogameService = inject(VideogameService);
+  private readonly videogameService = inject(VideogameService);
 
   games = signal<VideogameResponse[]>([]);
   totalElements = signal(0);

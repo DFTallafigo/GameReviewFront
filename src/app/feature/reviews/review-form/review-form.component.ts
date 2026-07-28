@@ -52,11 +52,11 @@ import { ReviewService } from '../review.service';
   `]
 })
 export class ReviewFormComponent {
-  private fb = inject(FormBuilder);
-  private reviewService = inject(ReviewService);
-  private snackBar = inject(MatSnackBar);
-  private dialogRef = inject(MatDialogRef<ReviewFormComponent>);
-  private data = inject<{ videogameId: number }>(MAT_DIALOG_DATA);
+  private readonly fb = inject(FormBuilder);
+  private readonly reviewService = inject(ReviewService);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly dialogRef = inject(MatDialogRef<ReviewFormComponent>);
+  private readonly data = inject<{ videogameId: number }>(MAT_DIALOG_DATA);
 
   form: FormGroup = this.fb.group({
     score: [0, [Validators.required, Validators.min(1), Validators.max(5)]],

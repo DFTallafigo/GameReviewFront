@@ -26,7 +26,7 @@ import { AuthService } from '../../../feature/auth/auth.service';
 
       <div class="header-right">
         @if (authContext.isAuthenticated()) {
-          <span class="user-info">{{ authContext.getUsername() }}</span>
+          <a class="user-info" routerLink="/profile">{{ authContext.getUsername() }}</a>
           <button mat-button (click)="logout()">Cerrar sesion</button>
         } @else {
           <a mat-button routerLink="/login">Iniciar sesion</a>
@@ -61,12 +61,16 @@ import { AuthService } from '../../../feature/auth/auth.service';
     .logo-gr:hover {
       text-shadow: 0 0 20px rgba(255, 113, 206, 0.8), 0 0 40px rgba(1, 205, 254, 0.4);
     }
-    .user-info { font-size: 0.9rem; opacity: 0.9; margin-right: 4px; }
+    .user-info {
+      font-size: 0.9rem; opacity: 0.9; margin-right: 4px;
+      color: inherit; text-decoration: none; cursor: pointer;
+    }
+    .user-info:hover { text-decoration: underline; }
   `]
 })
 export class HeaderComponent {
   authContext = inject(AuthContextService);
-  private authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
   logout(): void {
     this.authService.logout();

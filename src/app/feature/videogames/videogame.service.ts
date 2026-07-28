@@ -7,8 +7,8 @@ import { VideogameRequest, VideogameResponse } from '../../domain/videogame.mode
 
 @Injectable({ providedIn: 'root' })
 export class VideogameService {
-  private http = inject(HttpClient);
-  private url = `${environment.apiUrl}/videogames`;
+  private readonly http = inject(HttpClient);
+  private readonly url = `${environment.apiUrl}/videogames`;
 
   list(page = 0, size = 20, name?: string, sortBy = 'id', sortDir = 'asc'): Observable<ApiResponse<PaginatedData<VideogameResponse>>> {
     let params = new HttpParams()
