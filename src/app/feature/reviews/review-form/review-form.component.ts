@@ -45,7 +45,7 @@ import { ReviewService } from '../review.service';
   styles: [`
     .full-width { width: 100%; }
     .score-selector { display: flex; gap: 4px; margin-bottom: 16px; }
-    .star { cursor: pointer; font-size: 32px; width: 32px; height: 32px; color: #ccc; transition: color 0.2s; }
+    .star { cursor: pointer; font-size: 32px; width: 32px; height: 32px; color: rgba(255, 255, 255, 0.3); transition: color 0.2s; }
     .star.active { color: #f5a623; }
     .star:hover { color: #f5a623; }
   `]

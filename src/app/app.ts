@@ -14,7 +14,7 @@ import { FooterComponent } from './shared/layout/footer/footer.component';
     <app-footer />
   `,
   styles: [`
-    main { min-height: calc(100vh - 128px); }
+    main { min-height: calc(100vh - 128px); position: relative; z-index: 1; }
   `]
 })
 export class App {}

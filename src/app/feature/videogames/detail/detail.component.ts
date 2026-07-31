@@ -40,9 +40,6 @@ import { ReviewFormComponent } from '../../reviews/review-form/review-form.compo
             @if (game()!.metacritic) {
               <p><strong>Metacritic:</strong> {{ game()!.metacritic }}</p>
             }
-            @if (game()!.ratingRawg) {
-              <p><strong>Rating RAWG:</strong> {{ game()!.ratingRawg | number:'1.1-1' }}</p>
-            }
             @if (game()!.averageRating) {
               <p><strong>Rating usuarios:</strong> {{ game()!.averageRating | number:'1.1-1' }}/5 ({{ game()!.totalReviews }} reviews)</p>
             }
@@ -110,19 +107,26 @@ import { ReviewFormComponent } from '../../reviews/review-form/review-form.compo
   styles: [`
     .detail-container { max-width: 900px; margin: 0 auto; padding: 24px; }
     .game-header { display: flex; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
-    .cover { width: 300px; border-radius: 8px; object-fit: cover; }
-    .no-cover { width: 300px; height: 200px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .cover { width: 300px; max-height: 250px; border-radius: 8px; object-fit: contain; }
+    .no-cover { width: 300px; height: 200px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .no-cover mat-icon { font-size: 64px; width: 64px; height: 64px; opacity: 0.3; }
-    .game-info { flex: 1; min-width: 280px; }
-    .game-info h1 { margin-top: 0; }
+    .game-info { flex: 1; min-width: 280px; color: rgba(255, 255, 255, 0.9); }
+    .game-info h1 { margin-top: 0; font-size: 1.2rem; }
+    .game-info p { color: rgba(255, 255, 255, 0.8); }
+    .game-info strong { color: rgba(255, 255, 255, 0.95); }
     .chips-section { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
-    .chip { background: var(--mat-sys-primary-container, #e0e0e0); color: var(--mat-sys-on-primary-container, #333); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; }
-    .chip.platform { background: var(--mat-sys-tertiary-container, #d0e0ff); color: var(--mat-sys-on-tertiary-container, #003366); }
+    .chip { background: rgba(255, 113, 206, 0.2); color: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; border: 1px solid rgba(255, 113, 206, 0.3); }
+    .chip.platform { background: rgba(1, 205, 254, 0.2); color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(1, 205, 254, 0.3); }
     .actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-    .synopsis-card { margin-bottom: 24px; }
-    .review-card { margin-bottom: 12px; }
+    .synopsis-card { margin-bottom: 24px; background: rgba(255, 255, 255, 0.06) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .synopsis-card mat-card-title, .synopsis-card p { color: rgba(255, 255, 255, 0.85); }
+    .review-card { margin-bottom: 12px; background: rgba(255, 255, 255, 0.06) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .review-card mat-card-title { color: rgba(255, 255, 255, 0.9); }
+    .review-card mat-card-subtitle { color: rgba(255, 255, 255, 0.5); }
+    .review-card p { color: rgba(255, 255, 255, 0.8); }
     .score { font-size: 1.1rem; color: #f5a623; }
-    .no-reviews { opacity: 0.6; }
+    .no-reviews { opacity: 0.6; color: rgba(255, 255, 255, 0.7); }
+    h1, h2 { color: rgba(255, 255, 255, 0.9); }
   `]
 })
 export class DetailComponent implements OnInit {

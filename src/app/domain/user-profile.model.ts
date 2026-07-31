@@ -9,6 +9,7 @@ export interface UserProfile {
 
 export interface UserReview {
   videogameId: number;
+  steamAppId?: number;
   videogameName: string;
   slug: string;
   coverUrl: string;

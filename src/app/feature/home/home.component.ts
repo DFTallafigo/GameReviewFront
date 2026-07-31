@@ -23,7 +23,6 @@ import { SynthwavePalmsComponent } from '../../shared/ui/synthwave-palms/synthwa
         <a mat-raised-button routerLink="/login" class="cta-btn cta-secondary">Sign In</a>
       </div>
     </div>
-    <div class="cyber-scanlines scanlines-overlay"></div>
   </div>
 </div>
   `,

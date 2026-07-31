@@ -13,8 +13,9 @@ import { Component } from '@angular/core';
       padding: 2px;
       font-size: 0.75rem;
       opacity: 0.5;
-      border-top: 1px solid var(--mat-sys-outline-variant, #ccc);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       margin-top: 0;
+      color: rgba(255, 255, 255, 0.6);
     }
   `]
 })

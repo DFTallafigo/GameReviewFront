@@ -65,9 +65,6 @@ import { SynthwavePalmsComponent } from '../../../shared/ui/synthwave-palms/synt
       </mat-card>
     </div>
   </div>
-
-  <div class="grid-floor"></div>
-  <div class="cyber-scanlines scanlines-overlay"></div>
 </div>
   `,
   styles: [`
@@ -77,7 +74,6 @@ import { SynthwavePalmsComponent } from '../../../shared/ui/synthwave-palms/synt
       position: relative;
       height: 100%;
       overflow: hidden;
-      background: linear-gradient(180deg, #b44dd8 0%, #8a3ebf 20%, #5c2d91 40%, #1a1035 65%, #0a0a1a 100%);
     }
 
     .sun {
@@ -203,24 +199,6 @@ import { SynthwavePalmsComponent } from '../../../shared/ui/synthwave-palms/synt
       background: repeating-linear-gradient(180deg, #ffd700 0px, #ffd700 49px, transparent 49px, transparent 98px);
     }
 
-    .grid-floor {
-      position: absolute;
-      bottom: 0;
-      left: -50%;
-      right: -50%;
-      height: 50%;
-      background-image:
-        linear-gradient(rgba(255, 113, 206, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(1, 205, 254, 0.12) 1px, transparent 1px);
-      background-size: 60px 60px;
-      transform: perspective(400px) rotateX(60deg);
-      transform-origin: bottom center;
-      mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-    }
-
-    .cyber-scanlines::after { z-index: 3; }
-
     @media (max-width: 768px) {
       .split-layout {
         flex-direction: column;
@@ -237,7 +215,6 @@ import { SynthwavePalmsComponent } from '../../../shared/ui/synthwave-palms/synt
 
       .road { left: 25%; right: 25%; }
       .road::after { width: 4px; margin-left: -2px; }
-      .grid-floor { background-size: 30px 30px; height: 35%; }
     }
   `]
 })

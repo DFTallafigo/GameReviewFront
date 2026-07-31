@@ -57,7 +57,8 @@ import { VideogameService } from '../videogame.service';
   `,
   styles: [`
     .form-container { display: flex; justify-content: center; padding: 24px; }
-    .form-card { width: 100%; max-width: 600px; }
+    .form-card { width: 100%; max-width: 600px; background: rgba(255, 255, 255, 0.06) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .form-card mat-card-title { color: rgba(255, 255, 255, 0.9); }
     .full-width { width: 100%; }
     .form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
   `]

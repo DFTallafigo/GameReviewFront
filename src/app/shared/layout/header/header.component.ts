@@ -39,6 +39,8 @@ import { AuthService } from '../../../feature/auth/auth.service';
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
+      background: #0a0a1a;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .header-left, .header-right {
       display: flex;
