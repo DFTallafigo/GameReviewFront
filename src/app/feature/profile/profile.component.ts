@@ -10,7 +10,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserService } from '../../shared/services/user.service';
 import { AuthContextService } from '../../shared/services/auth-context.service';
-import { UserProfile, UserReview } from '../../domain/user-profile.model';
+import { UserProfile } from '../../domain/user-profile.model';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 @Component({

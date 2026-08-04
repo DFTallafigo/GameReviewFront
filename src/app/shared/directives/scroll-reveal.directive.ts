@@ -31,9 +31,8 @@ export class ScrollRevealDirective implements OnInit {
       element.classList.add('reveal-scale');
     }
 
-    // Check for stagger index from parent
-    const staggerIndex = element.getAttribute('data-stagger');
-    if (staggerIndex !== null) {
+    const staggerIndex = element.dataset['stagger'];
+    if (staggerIndex !== undefined) {
       element.style.setProperty('--stagger-index', staggerIndex);
     }
 

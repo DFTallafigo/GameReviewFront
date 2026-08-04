@@ -125,7 +125,7 @@
     transparent 75%
   );
 
-  &::after {
+  &::after { // NOSONAR SCSS mixin parent ref
     content: '';
     position: absolute;
     inset: 0;
@@ -160,7 +160,7 @@
   mask-image: linear-gradient(to top, black 0%, transparent 80%);
   -webkit-mask-image: linear-gradient(to top, black 0%, transparent 80%);
 
-  &::after {
+  &::after { // NOSONAR SCSS mixin parent ref
     content: '';
     position: absolute;
     left: 50%;
@@ -180,7 +180,7 @@
     left: 25%;
     right: 25%;
     border-width: 4px;
-    &::after {
+    &::after { // NOSONAR SCSS mixin parent ref
       width: 4px;
       margin-left: -2px;
     }
@@ -191,15 +191,15 @@
 @mixin interactive-scale {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 
-  &:hover {
+  &:hover { // NOSONAR SCSS mixin parent ref
     transform: translateY(-4px);
   }
 
-  &:active {
+  &:active { // NOSONAR SCSS mixin parent ref
     transform: scale(0.98) translateY(-2px);
   }
 
-  &:focus-visible {
+  &:focus-visible { // NOSONAR SCSS mixin parent ref
     outline: none;
     box-shadow: var(--gr-focus-ring);
   }

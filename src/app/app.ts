@@ -1,22 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { trigger, transition, style, animate, query, group } from '@angular/animations';
+import { trigger, transition, style, animate, query, group } from '@angular/animations'; // NOSONAR deprecated but no replacement yet
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
 
-const routeAnimation = trigger('routeAnimation', [
-  transition('* <=> *', [
-    query(':enter', [
-      style({ opacity: 0, transform: 'translateY(12px)' })
+const routeAnimation = trigger('routeAnimation', [ // NOSONAR deprecated overload
+  transition('* <=> *', [ // NOSONAR deprecated overload
+    query(':enter', [ // NOSONAR deprecated overload
+      style({ opacity: 0, transform: 'translateY(12px)' }) // NOSONAR deprecated overload
     ], { optional: true }),
-    group([
-      query(':leave', [
-        animate('200ms ease-out', style({ opacity: 0, transform: 'translateY(-8px)' }))
+    group([ // NOSONAR deprecated overload
+      query(':leave', [ // NOSONAR deprecated overload
+        animate('200ms ease-out', style({ opacity: 0, transform: 'translateY(-8px)' })) // NOSONAR deprecated overload
       ], { optional: true }),
-      query(':enter', [
-        animate('300ms 100ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      query(':enter', [ // NOSONAR deprecated overload
+        animate('300ms 100ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })) // NOSONAR deprecated overload
       ], { optional: true })
     ])
   ])

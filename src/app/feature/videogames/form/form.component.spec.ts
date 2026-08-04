@@ -149,7 +149,7 @@ describe('FormComponent', () => {
         }));
         component.onSubmit();
         tick();
-        expect(snackBarSpy.open).toHaveBeenCalledWith('Creado', 'Cerrar', { duration: 3000 });
+        expect(snackBarSpy.open).toHaveBeenCalledWith('Created', 'Close', { duration: 3000 });
       }));
 
       it('should reset loading on error', fakeAsync(() => {
@@ -169,7 +169,7 @@ describe('FormComponent', () => {
         })));
         component.onSubmit();
         tick();
-        expect(snackBarSpy.open).toHaveBeenCalledWith('Creation failed', 'Cerrar', { duration: 4000 });
+        expect(snackBarSpy.open).toHaveBeenCalledWith('Creation failed', 'Close', { duration: 4000 });
       }));
 
       it('should show default error message when no server message', fakeAsync(() => {
@@ -177,20 +177,20 @@ describe('FormComponent', () => {
         videogameServiceSpy.create.and.returnValue(throwError(() => ({})));
         component.onSubmit();
         tick();
-        expect(snackBarSpy.open).toHaveBeenCalledWith('Error al guardar', 'Cerrar', { duration: 4000 });
+        expect(snackBarSpy.open).toHaveBeenCalledWith('Save failed', 'Close', { duration: 4000 });
       }));
     });
 
     describe('template', () => {
-      it('should show "Nuevo Videojuego" as title', () => {
+      it('should show "New Game" as title', () => {
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('mat-card-title')?.textContent).toContain('Nuevo Videojuego');
+        expect(compiled.querySelector('mat-card-title')?.textContent).toContain('New Game');
       });
 
-      it('should show "Crear" as submit button text', () => {
+      it('should show "Create" as submit button text', () => {
         const compiled = fixture.nativeElement as HTMLElement;
         const button = compiled.querySelector('button[type="submit"]') as HTMLButtonElement;
-        expect(button.textContent?.trim()).toContain('Crear');
+        expect(button.textContent?.trim()).toContain('Create');
       });
 
       it('should disable submit when form is invalid', () => {
@@ -199,20 +199,20 @@ describe('FormComponent', () => {
         expect(button.disabled).toBeTrue();
       });
 
-      it('should show "Guardando..." when loading', () => {
+      it('should show "Saving..." when loading', () => {
         component.form.patchValue({ name: 'New Game' });
         component.loading = true;
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
         const button = compiled.querySelector('button[type="submit"]') as HTMLButtonElement;
-        expect(button.textContent?.trim()).toContain('Guardando...');
+        expect(button.textContent?.trim()).toContain('Saving...');
       });
 
       it('should have a cancel link to /videogames', () => {
         const compiled = fixture.nativeElement as HTMLElement;
         const link = compiled.querySelector('a[routerLink="/videogames"]');
         expect(link).toBeTruthy();
-        expect(link?.textContent).toContain('Cancelar');
+        expect(link?.textContent).toContain('Cancel');
       });
     });
   });
@@ -257,15 +257,15 @@ describe('FormComponent', () => {
       expect(component.form.get('releaseDate')?.value).toBe('2024-01-01');
     });
 
-    it('should show "Editar Videojuego" as title', () => {
+    it('should show "Edit Game" as title', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelector('mat-card-title')?.textContent).toContain('Editar Videojuego');
+      expect(compiled.querySelector('mat-card-title')?.textContent).toContain('Edit Game');
     });
 
-    it('should show "Actualizar" as submit button text', () => {
+    it('should show "Update" as submit button text', () => {
       const compiled = fixture.nativeElement as HTMLElement;
       const button = compiled.querySelector('button[type="submit"]') as HTMLButtonElement;
-      expect(button.textContent?.trim()).toContain('Actualizar');
+      expect(button.textContent?.trim()).toContain('Update');
     });
 
     it('should call videogameService.update on submit', fakeAsync(() => {
@@ -286,7 +286,7 @@ describe('FormComponent', () => {
       videogameServiceSpy.update.and.returnValue(of(mockGameResponse));
       component.onSubmit();
       tick();
-      expect(snackBarSpy.open).toHaveBeenCalledWith('Actualizado', 'Cerrar', { duration: 3000 });
+      expect(snackBarSpy.open).toHaveBeenCalledWith('Updated', 'Close', { duration: 3000 });
     }));
   });
 });

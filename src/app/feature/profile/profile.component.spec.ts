@@ -3,7 +3,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { ProfileComponent } from './profile.component';
 import { UserService } from '../../shared/services/user.service';
 import { AuthContextService } from '../../shared/services/auth-context.service';
@@ -103,7 +103,7 @@ describe('ProfileComponent', () => {
     it('should display username', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelector('.profile-info h1')?.textContent).toContain('testuser');
+      expect(compiled.querySelector('.username')?.textContent).toContain('testuser');
     });
 
     it('should display email', () => {
@@ -127,20 +127,20 @@ describe('ProfileComponent', () => {
     it('should display review count', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelector('h2')?.textContent).toContain('2');
+      expect(compiled.querySelector('.section-title')?.textContent).toContain('2');
     });
 
-    it('should display reviews', () => {
+    it('should display game cards', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      const cards = compiled.querySelectorAll('.review-card');
+      const cards = compiled.querySelectorAll('.game-card');
       expect(cards).toHaveSize(2);
     });
 
     it('should display cover image when coverUrl exists', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      const img = compiled.querySelector('.review-card img');
+      const img = compiled.querySelector('.game-card img');
       expect(img).toBeTruthy();
       expect(img?.getAttribute('src')).toBe('http://example.com/cover.jpg');
     });
@@ -156,8 +156,8 @@ describe('ProfileComponent', () => {
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
       const scores = compiled.querySelectorAll('.score');
-      expect(scores[0]?.textContent).toContain('★★★★☆');
-      expect(scores[1]?.textContent).toContain('★★☆☆☆');
+      expect(scores[0]?.textContent).toContain('4/5');
+      expect(scores[1]?.textContent).toContain('2/5');
     });
 
     it('should display completed chip when review is completed', () => {
@@ -165,7 +165,7 @@ describe('ProfileComponent', () => {
       const compiled = fixture.nativeElement as HTMLElement;
       const completed = compiled.querySelectorAll('.completed-chip');
       expect(completed).toHaveSize(1);
-      expect(completed[0]?.textContent).toContain('Completado');
+      expect(completed[0]?.textContent).toContain('Completed');
     });
 
     it('should display comment when comment exists', () => {
@@ -178,15 +178,15 @@ describe('ProfileComponent', () => {
       userServiceSpy.getProfile.and.returnValue(of({ status: 200, message: 'OK', data: emptyProfile }));
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelector('.no-reviews')?.textContent).toContain('Aun no has escrito ninguna review');
+      expect(compiled.querySelector('.empty-state')?.textContent).toContain("You haven't written any reviews yet.");
     });
 
-    it('should not render profile-container when profile is null', () => {
+    it('should not render profile layout when profile is null', () => {
       authContextSpy.getUsername.and.returnValue(null);
       fixture = TestBed.createComponent(ProfileComponent);
       fixture.detectChanges();
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelector('.profile-container')).toBeNull();
+      expect(compiled.querySelector('.profile-layout')).toBeNull();
     });
   });
 });
