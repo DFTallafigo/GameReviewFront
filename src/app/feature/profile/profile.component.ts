@@ -11,13 +11,15 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserService } from '../../shared/services/user.service';
 import { AuthContextService } from '../../shared/services/auth-context.service';
 import { UserProfile, UserReview } from '../../domain/user-profile.model';
+import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 @Component({
   selector: 'app-profile',
   imports: [
     RouterLink, DatePipe, DecimalPipe,
     MatCardModule, MatButtonModule, MatIconModule,
-    MatChipsModule, MatProgressBarModule, MatButtonToggleModule, MatSnackBarModule
+    MatChipsModule, MatProgressBarModule, MatButtonToggleModule, MatSnackBarModule,
+    ScrollRevealDirective
   ],
   template: `
     @if (loading()) {
@@ -26,14 +28,14 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
 
     @if (profile()) {
       <div class="profile-layout">
-        <aside class="sidebar">
-          <mat-card class="user-card">
+        <aside class="sidebar" appScrollReveal="left">
+          <mat-card class="user-card glass-card">
             <div class="avatar">{{ profile()!.username.charAt(0).toUpperCase() }}</div>
             <h2 class="username">{{ profile()!.username }}</h2>
             <p class="email">{{ profile()!.email }}</p>
             <div class="meta">
               <span class="role-chip">{{ profile()!.role }}</span>
-              <span class="member-since">Miembro desde {{ profile()!.createdAt | date:'mediumDate' }}</span>
+              <span class="member-since">Member since {{ profile()!.createdAt | date:'mediumDate' }}</span>
             </div>
 
             <div class="stats">
@@ -48,35 +50,35 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
                 <mat-icon>star</mat-icon>
                 <div class="stat-content">
                   <span class="stat-value">{{ averageScore() | number:'1.1-1' }}</span>
-                  <span class="stat-label">Promedio</span>
+                  <span class="stat-label">Average</span>
                 </div>
               </div>
               <div class="stat-item">
                 <mat-icon>check_circle</mat-icon>
                 <div class="stat-content">
                   <span class="stat-value">{{ completedCount() }}</span>
-                  <span class="stat-label">Completados</span>
+                  <span class="stat-label">Completed</span>
                 </div>
               </div>
             </div>
           </mat-card>
         </aside>
 
-        <main class="main-content">
+        <main class="main-content" appScrollReveal="up" [style.--stagger-index]="'1'">
           <div class="games-header">
-            <h2>Mis Juegos ({{ filteredGames().length }})</h2>
+            <h2 class="section-title">My Games ({{ filteredGames().length }})</h2>
             <div class="filters">
               <mat-button-toggle-group [value]="filter()" (change)="onFilterChange($event)">
-                <mat-button-toggle value="all">Todos</mat-button-toggle>
-                <mat-button-toggle value="completed">Completados</mat-button-toggle>
-                <mat-button-toggle value="pending">Pendientes</mat-button-toggle>
+                <mat-button-toggle value="all">All</mat-button-toggle>
+                <mat-button-toggle value="completed">Completed</mat-button-toggle>
+                <mat-button-toggle value="pending">Pending</mat-button-toggle>
               </mat-button-toggle-group>
             </div>
           </div>
 
           <div class="games-grid">
-            @for (review of filteredGames(); track review.videogameId) {
-              <mat-card class="game-card" (click)="goToDetail(review.videogameId)">
+            @for (review of filteredGames(); track review.videogameId; let i = $index) {
+              <mat-card class="game-card" (click)="goToDetail(review.videogameId)" appScrollReveal="scale" [style.--stagger-index]="'' + (i + 2)">
                 @if (review.coverUrl) {
                   <img mat-card-image [src]="review.coverUrl" [alt]="review.videogameName" class="cover" />
                 } @else {
@@ -101,11 +103,11 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
                   </p>
                   @if (review.completed) {
                     <span class="completed-chip">
-                      <mat-icon>check_circle</mat-icon> Completado
+                      <mat-icon>check_circle</mat-icon> Completed
                     </span>
                   } @else {
                     <span class="pending-chip">
-                      <mat-icon>schedule</mat-icon> Pendiente
+                      <mat-icon>schedule</mat-icon> Pending
                     </span>
                   }
                   @if (review.comment) {
@@ -117,11 +119,11 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
               <div class="empty-state">
                 <mat-icon class="empty-icon">sports_esports</mat-icon>
                 @if (filter() !== 'all') {
-                  <p>No hay juegos {{ filter() === 'completed' ? 'completados' : 'pendientes' }}.</p>
-                  <button mat-button color="primary" (click)="filter.set('all')">Ver todos</button>
+                  <p>No {{ filter() === 'completed' ? 'completed' : 'pending' }} games.</p>
+                  <button mat-button color="primary" (click)="filter.set('all')">View all</button>
                 } @else {
-                  <p>Aun no has escrito ninguna review.</p>
-                  <a mat-raised-button color="primary" routerLink="/videogames">Explorar juegos</a>
+                  <p>You haven't written any reviews yet.</p>
+                  <a mat-raised-button color="primary" routerLink="/videogames">Browse games</a>
                 }
               </div>
             }
@@ -147,16 +149,13 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
       padding: 24px;
       position: sticky;
       top: 24px;
-      background: rgba(255, 255, 255, 0.06) !important;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .avatar {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ff71ce, #01cdfe);
+      background: linear-gradient(135deg, var(--gr-accent-pink), var(--gr-accent-cyan));
       color: #fff;
       display: flex;
       align-items: center;
@@ -166,8 +165,8 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
       margin: 0 auto 16px;
     }
 
-    .username { margin: 0 0 4px; text-align: center; color: rgba(255, 255, 255, 0.9); }
-    .email { margin: 0 0 12px; opacity: 0.6; text-align: center; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
+    .username { margin: 0 0 4px; text-align: center; color: var(--gr-text-primary); }
+    .email { margin: 0 0 12px; text-align: center; font-size: var(--gr-text-sm); color: var(--gr-text-muted); }
 
     .meta {
       display: flex;
@@ -179,23 +178,23 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
     }
 
     .role-chip {
-      background: rgba(255, 113, 206, 0.2);
-      color: rgba(255, 255, 255, 0.9);
+      background: var(--gr-chip-genre-bg);
+      color: var(--gr-text-primary);
       padding: 2px 10px;
-      border-radius: 12px;
+      border-radius: var(--gr-radius-chip);
       font-size: 0.75rem;
       font-weight: 500;
-      border: 1px solid rgba(255, 113, 206, 0.3);
+      border: 1px solid var(--gr-chip-genre-border);
     }
 
-    .member-since { font-size: 0.8rem; opacity: 0.5; color: rgba(255, 255, 255, 0.6); }
+    .member-since { font-size: var(--gr-text-sm); color: var(--gr-text-muted); }
 
     .stats {
       display: flex;
       flex-direction: column;
       gap: 12px;
       padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid var(--gr-border-subtle);
     }
 
     .stat-item {
@@ -205,15 +204,15 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
     }
 
     .stat-item mat-icon {
-      color: #ff71ce;
+      color: var(--gr-accent-pink);
       font-size: 20px;
       width: 20px;
       height: 20px;
     }
 
     .stat-content { display: flex; flex-direction: column; }
-    .stat-value { font-weight: 600; font-size: 1.1rem; line-height: 1.2; color: rgba(255, 255, 255, 0.9); }
-    .stat-label { font-size: 0.75rem; opacity: 0.5; color: rgba(255, 255, 255, 0.6); }
+    .stat-value { font-weight: 600; font-size: 1.1rem; line-height: 1.2; color: var(--gr-text-primary); }
+    .stat-label { font-size: 0.75rem; color: var(--gr-text-muted); }
 
     .main-content { flex: 1; min-width: 0; }
 
@@ -226,7 +225,14 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
       margin-bottom: 20px;
     }
 
-    .games-header h2 { margin: 0; color: rgba(255, 255, 255, 0.9); }
+    .section-title {
+      font-family: var(--gr-font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--gr-text-primary);
+      margin: 0;
+    }
 
     .filters { display: flex; gap: 8px; }
 
@@ -236,8 +242,9 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
       gap: 16px;
     }
 
-    .game-card { transition: transform 0.2s; background: rgba(255, 255, 255, 0.06) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .game-card:hover { transform: translateY(-4px); }
+    .game-card {
+      cursor: pointer;
+    }
 
     .cover { height: 160px; object-fit: cover; }
 
@@ -246,19 +253,19 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--gr-glass2-bg);
     }
 
     .no-cover mat-icon { font-size: 48px; width: 48px; height: 48px; opacity: 0.3; }
 
     .game-card mat-card-title a {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--gr-text-primary);
       text-decoration: none;
     }
 
     .game-card mat-card-title a:hover { text-decoration: underline; }
 
-    .game-card mat-card-subtitle { color: rgba(255, 255, 255, 0.5); }
+    .game-card mat-card-subtitle { color: var(--gr-text-dim); }
 
     .score {
       display: flex;
@@ -268,28 +275,31 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
     }
 
     .star { font-size: 18px; width: 18px; height: 18px; color: rgba(255, 255, 255, 0.3); }
-    .star.filled { color: #f5a623; }
-    .score-text { margin-left: 8px; font-size: 0.9rem; opacity: 0.7; color: rgba(255, 255, 255, 0.8); }
+    .star.filled { color: var(--gr-accent-star); }
+    .score-text { margin-left: 8px; font-size: 0.9rem; color: var(--gr-text-secondary); }
 
-    .completed-chip, .pending-chip {
+    .completed-chip {
       display: inline-flex;
       align-items: center;
       gap: 4px;
       padding: 2px 8px;
-      border-radius: 12px;
+      border-radius: var(--gr-radius-chip);
       font-size: 0.75rem;
-    }
-
-    .completed-chip {
-      background: rgba(1, 205, 254, 0.2);
-      color: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(1, 205, 254, 0.3);
+      background: var(--gr-chip-platform-bg);
+      border: 1px solid var(--gr-chip-platform-border);
+      color: var(--gr-text-primary);
     }
 
     .pending-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: var(--gr-radius-chip);
+      font-size: 0.75rem;
       background: rgba(255, 113, 206, 0.15);
-      color: rgba(255, 255, 255, 0.8);
       border: 1px solid rgba(255, 113, 206, 0.25);
+      color: var(--gr-text-secondary);
     }
 
     .completed-chip mat-icon, .pending-chip mat-icon {
@@ -300,17 +310,15 @@ import { UserProfile, UserReview } from '../../domain/user-profile.model';
 
     .comment {
       font-size: 0.9rem;
-      opacity: 0.7;
       margin-top: 8px;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--gr-text-secondary);
     }
 
     .empty-state {
       grid-column: 1 / -1;
       text-align: center;
       padding: 64px 24px;
-      opacity: 0.6;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--gr-text-muted);
     }
 
     .empty-icon { font-size: 64px; width: 64px; height: 64px; margin-bottom: 16px; }
@@ -368,7 +376,7 @@ export class ProfileComponent implements OnInit {
         },
         error: () => {
           this.loading.set(false);
-          this.snackBar.open('Error al cargar el perfil', 'Cerrar', { duration: 4000 });
+          this.snackBar.open('Failed to load profile', 'Close', { duration: 4000 });
         }
       });
     } else {
