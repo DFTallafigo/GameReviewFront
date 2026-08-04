@@ -1,0 +1,131 @@
+// Shared styles for auth pages (Login, Register)
+@use 'variables' as *;
+
+.auth-page {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sun {
+  @include synthwave-sun;
+}
+
+.split-layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 3rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+}
+
+.left-panel {
+  flex: 1;
+  color: #fff;
+  text-align: center;
+
+  .auth-title {
+    font-family: var(--gr-font-display);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    text-shadow: 0 0 15px var(--gr-glow-pink);
+
+    @media (max-width: 768px) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    text-shadow: 0 0 15px var(--gr-glow-white);
+
+    @media (max-width: 768px) {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.welcome-text {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--gr-text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.sub-text {
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  color: var(--gr-text-muted);
+  margin: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.right-panel {
+  flex: 0 0 400px;
+
+  @media (max-width: 768px) {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+.auth-card {
+  @include glass-surface;
+
+  mat-card-title {
+    color: var(--gr-text-primary);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card-actions {
+  text-align: center;
+  padding: 16px !important;
+}
+
+.auth-link {
+  font-size: 0.9rem;
+  color: var(--gr-text-muted);
+  margin: 0;
+
+  a {
+    color: var(--gr-accent-cyan);
+    text-decoration: none;
+    text-shadow: 0 0 8px var(--gr-glow-cyan);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.road {
+  @include synthwave-road;
+}

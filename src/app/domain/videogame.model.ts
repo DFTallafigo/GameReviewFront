@@ -12,13 +12,13 @@ export interface VideogameRequest {
 
 export interface VideogameResponse {
   id: number;
-  rawgId?: number;
+  steamAppId?: number;
   name: string;
   slug: string;
   synopsis?: string;
   releaseDate?: string;
   coverUrl?: string;
-  ratingRawg?: number;
+  backgroundUrl?: string;
   metacritic?: number;
   esrbRating?: string;
   playtime?: number;

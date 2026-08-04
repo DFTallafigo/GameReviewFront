@@ -6,7 +6,7 @@ const TOKEN_KEY = 'gr_token';
 
 @Injectable({ providedIn: 'root' })
 export class AuthContextService {
-  private user = signal<AuthResponse | null>(this.loadUser());
+  private readonly user = signal<AuthResponse | null>(this.loadUser());
 
   readonly currentUser = this.user.asReadonly();
   readonly isAuthenticated = computed(() => !!this.user());

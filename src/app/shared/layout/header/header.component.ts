@@ -8,7 +8,6 @@ import { AuthService } from '../../../feature/auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [RouterLink, MatToolbarModule, MatButtonModule, MatIconModule],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
@@ -16,21 +15,21 @@ import { AuthService } from '../../../feature/auth/auth.service';
         @if (authContext.isAuthenticated()) {
           @if (authContext.isAdmin()) {
             <a mat-button routerLink="/videogames/new">
-              <mat-icon>add</mat-icon> Nuevo
+              <mat-icon>add</mat-icon> New Game
             </a>
           }
         }
       </div>
 
-      <a routerLink="/" class="logo-gr">GR</a>
+      <a routerLink="/" class="logo-gr" aria-label="GameReview home">GR</a>
 
       <div class="header-right">
         @if (authContext.isAuthenticated()) {
-          <span class="user-info">{{ authContext.getUsername() }}</span>
-          <button mat-button (click)="logout()">Cerrar sesion</button>
+          <a class="user-info" routerLink="/profile">{{ authContext.getUsername() }}</a>
+          <button mat-button (click)="logout()">Log out</button>
         } @else {
-          <a mat-button routerLink="/login">Iniciar sesion</a>
-          <a mat-button routerLink="/register">Registrarse</a>
+          <a mat-button routerLink="/login">Log in</a>
+          <a mat-button routerLink="/register">Sign up</a>
         }
       </div>
     </mat-toolbar>
@@ -40,6 +39,8 @@ import { AuthService } from '../../../feature/auth/auth.service';
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
+      background: var(--gr-bg-dark);
+      border-bottom: 1px solid var(--gr-surface-border);
     }
     .header-left, .header-right {
       display: flex;
@@ -52,21 +53,26 @@ import { AuthService } from '../../../feature/auth/auth.service';
     .logo-gr {
       color: inherit;
       text-decoration: none;
+      font-family: var(--gr-font-display);
       font-size: 1.5rem;
       font-weight: 900;
       letter-spacing: 0.3em;
-      text-shadow: 0 0 10px rgba(255, 113, 206, 0.5);
+      text-shadow: 0 0 10px var(--gr-glow-pink);
       transition: text-shadow 0.3s;
     }
     .logo-gr:hover {
-      text-shadow: 0 0 20px rgba(255, 113, 206, 0.8), 0 0 40px rgba(1, 205, 254, 0.4);
+      text-shadow: 0 0 20px var(--gr-glow-pink), 0 0 40px var(--gr-glow-cyan);
     }
-    .user-info { font-size: 0.9rem; opacity: 0.9; margin-right: 4px; }
+    .user-info {
+      font-size: 0.9rem; opacity: 0.9; margin-right: 4px;
+      color: inherit; text-decoration: none; cursor: pointer;
+    }
+    .user-info:hover { text-decoration: underline; }
   `]
 })
 export class HeaderComponent {
   authContext = inject(AuthContextService);
-  private authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
   logout(): void {
     this.authService.logout();

@@ -45,6 +45,7 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "polyfills": ["zone.js"],
             "inlineStyleLanguage": "scss",
             "assets": [
               {
@@ -62,16 +63,22 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "600kB",
                   "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "6kB",
+                  "maximumError": "10kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -92,6 +99,24 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "GR-frontend:build:development",
+            "tsConfig": "tsconfig.spec.json",
+            "runner": "karma",
+            "runnerConfig": "karma.conf.js",
+            "browsers": ["ChromeHeadless"],
+            "include": ["**/*.spec.ts"],
+            "exclude": [],
+            "coverage": true,
+            "coverageReporters": [
+              ["lcovonly"],
+              ["html"],
+              ["text-summary"]
+            ]
+          }
         }
       }
     }

@@ -1,0 +1,206 @@
+// Design tokens - GR-frontend
+// Custom properties for consistent theming across all components
+
+:root {
+  // === Typography ===
+  --gr-font-display: 'Orbitron', sans-serif;
+  --gr-font-body: 'Roboto', sans-serif;
+
+  // === Accent Colors ===
+  --gr-accent-pink: #ff71ce;
+  --gr-accent-cyan: #01cdfe;
+  --gr-accent-gold: #ffd700;
+  --gr-accent-star: #f5a623;
+
+  // === Background ===
+  --gr-bg-dark: #0a0a1a;
+  --gr-bg-gradient: linear-gradient(180deg, #b44dd8 0%, #8a3ebf 20%, #5c2d91 40%, #1a1035 65%, #0a0a1a 100%);
+
+  // === Sun Gradient ===
+  --gr-sun-start: #ffb3b3;
+  --gr-sun-mid: #ff6b6b;
+  --gr-sun-end: #ff4757;
+
+  // === Road ===
+  --gr-road-start: #3d3d3d;
+  --gr-road-mid: #2a2a2a;
+  --gr-road-end: #1a1a1a;
+
+  // === Surface Glassmorphism Level 1 (Hero cards, modals) ===
+  --gr-glass1-bg: rgba(255, 255, 255, 0.08);
+  --gr-glass1-border: rgba(255, 255, 255, 0.12);
+  --gr-glass1-blur: blur(16px);
+
+  // === Surface Glassmorphism Level 2 (Game cards, sidebar) ===
+  --gr-glass2-bg: rgba(255, 255, 255, 0.06);
+  --gr-glass2-border: rgba(255, 255, 255, 0.10);
+  --gr-glass2-blur: blur(12px);
+
+  // === Surface Glassmorphism Level 3 (Chips, badges) ===
+  --gr-glass3-bg: rgba(255, 255, 255, 0.04);
+  --gr-glass3-border: rgba(255, 255, 255, 0.08);
+  --gr-glass3-blur: blur(8px);
+
+  // === Legacy surface (backward compat) ===
+  --gr-surface-bg: var(--gr-glass2-bg);
+  --gr-surface-border: var(--gr-glass2-border);
+  --gr-surface-border-strong: var(--gr-glass2-border);
+  --gr-surface-blur: var(--gr-glass2-blur);
+
+  // === Text Colors ===
+  --gr-text-primary: rgba(255, 255, 255, 0.9);
+  --gr-text-secondary: rgba(255, 255, 255, 0.75);
+  --gr-text-muted: rgba(255, 255, 255, 0.55);
+  --gr-text-dim: rgba(255, 255, 255, 0.5);
+
+  // === Chip Colors ===
+  --gr-chip-genre-bg: rgba(255, 113, 206, 0.2);
+  --gr-chip-genre-border: rgba(255, 113, 206, 0.3);
+  --gr-chip-platform-bg: rgba(1, 205, 254, 0.2);
+  --gr-chip-platform-border: rgba(1, 205, 254, 0.3);
+
+  // === Glow Effects ===
+  --gr-glow-pink: rgba(255, 113, 206, 0.5);
+  --gr-glow-cyan: rgba(1, 205, 254, 0.3);
+  --gr-glow-white: rgba(255, 255, 255, 0.3);
+
+  // === Spacing ===
+  --gr-radius-card: 12px;
+  --gr-radius-chip: 12px;
+
+  // === Shadows ===
+  --gr-shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --gr-shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+  // === Focus (Accessibility) ===
+  --gr-focus-ring: 0 0 0 3px rgba(1, 205, 254, 0.6);
+}
+
+// === Mixins ===
+
+@mixin glass-surface($level: 2) {
+  @if $level == 1 {
+    background: var(--gr-glass1-bg);
+    backdrop-filter: var(--gr-glass1-blur);
+    -webkit-backdrop-filter: var(--gr-glass1-blur);
+    border: 1px solid var(--gr-glass1-border);
+  } @else if $level == 3 {
+    background: var(--gr-glass3-bg);
+    backdrop-filter: var(--gr-glass3-blur);
+    -webkit-backdrop-filter: var(--gr-glass3-blur);
+    border: 1px solid var(--gr-glass3-border);
+  } @else {
+    background: var(--gr-glass2-bg);
+    backdrop-filter: var(--gr-glass2-blur);
+    -webkit-backdrop-filter: var(--gr-glass2-blur);
+    border: 1px solid var(--gr-glass2-border);
+  }
+  border-radius: var(--gr-radius-card);
+  box-shadow: var(--gr-shadow-card);
+}
+
+@mixin chip($bg, $border) {
+  @include glass-surface(3);
+  background: $bg;
+  color: var(--gr-text-primary);
+  padding: 2px 8px;
+  border-radius: var(--gr-radius-chip);
+  font-size: 0.75rem;
+  border: 1px solid $border;
+}
+
+@mixin synthwave-sun($top: 3%) {
+  position: absolute;
+  top: $top;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(80px, 25vw, 220px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--gr-sun-start) 0%,
+    var(--gr-sun-mid) 25%,
+    var(--gr-sun-end) 50%,
+    transparent 75%
+  );
+
+  &::after { // NOSONAR SCSS mixin parent ref
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(0, 0, 0, 0.18) 8px,
+      rgba(0, 0, 0, 0.18) 10px
+    );
+  }
+}
+
+@mixin synthwave-road {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  right: 30%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    var(--gr-road-start) 0%,
+    var(--gr-road-mid) 50%,
+    var(--gr-road-end) 100%
+  );
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: bottom center;
+  border-left: 6px solid rgba(255, 255, 255, 0.7);
+  border-right: 6px solid rgba(255, 255, 255, 0.7);
+  mask-image: linear-gradient(to top, black 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 80%);
+
+  &::after { // NOSONAR SCSS mixin parent ref
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    margin-left: -3px;
+    background: repeating-linear-gradient(
+      180deg,
+      var(--gr-accent-gold) 0px,
+      var(--gr-accent-gold) 49px,
+      transparent 49px,
+      transparent 98px
+    );
+  }
+
+  @media (max-width: 768px) {
+    left: 25%;
+    right: 25%;
+    border-width: 4px;
+    &::after { // NOSONAR SCSS mixin parent ref
+      width: 4px;
+      margin-left: -2px;
+    }
+  }
+}
+
+// === Interactive States Mixin ===
+@mixin interactive-scale {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+
+  &:hover { // NOSONAR SCSS mixin parent ref
+    transform: translateY(-4px);
+  }
+
+  &:active { // NOSONAR SCSS mixin parent ref
+    transform: scale(0.98) translateY(-2px);
+  }
+
+  &:focus-visible { // NOSONAR SCSS mixin parent ref
+    outline: none;
+    box-shadow: var(--gr-focus-ring);
+  }
+}
