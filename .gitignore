@@ -33,6 +33,7 @@ yarn-error.log
 /.angular/cache
 AGENTS.md
 .agents/
+skills-lock.json
 .sass-cache/
 /connect.lock
 /coverage
